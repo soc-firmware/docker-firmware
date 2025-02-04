@@ -1,19 +1,19 @@
 services:
-  yocto-builder:
+  firmware-builder:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: raspberry-pi
+    container_name: firmware
     stdin_open: true
     tty: true
     volumes:
-      - ./volumes:/home/builder/yocto-build
+      - ./volumes:/home/builder/firmware-build
     environment:
-      - YOCTO_DIR=/home/builder/yocto-build
+      - firmware_DIR=/home/builder/firmware-build
     user: "builder"
     networks:
-      - yocto-net
+      - firmware-net
 
 networks:
-  yocto-net:
+  firmware-net:
     driver: bridge

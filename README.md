@@ -1,14 +1,18 @@
-# 🚀 Yocto Docker Builder - raspberry pi
+# 🚀 firmware Docker Builder - raspberry pi
 
-Welcome to the **Yocto Docker Builder**, a streamlined, containerized environment for building Yocto projects using Docker. This project provides a **lightning-fast, reproducible, and isolated** setup, ensuring a **hassle-free** experience for Yocto builds. Say goodbye to dependency hell and inconsistent environments! 🚀🔥
+Welcome to the **firmware Docker Builder**, a streamlined, containerized environment for building firmware projects using Docker. This project provides a **lightning-fast, reproducible, and isolated** setup, ensuring a **hassle-free** experience for firmware builds. Say goodbye to dependency hell and inconsistent environments! 🚀🔥
 
 ## 🏗️ Features
 
+- **Firmware-specific toolchain** pre-installed 🛠️
+- **Cross-compilation support** for embedded targets
+- **Build artifact caching** for faster iterations
+- **Integrated debug tools** for firmware validation
 - **Fully containerized build environment** 🐳
 - **Minimal host dependencies** (Just Docker & Docker Compose!)
 - **Reproducible builds** across machines and environments
 - **Automatic volume management** for persistent storage
-- **Preconfigured for Yocto builds** (but flexible for other needs)
+- **Preconfigured for firmware builds** (but flexible for other needs)
 - **Multi-architecture support** (x86_64, ARM, etc.)
 - **Optimized caching** to reduce build times
 
@@ -27,25 +31,50 @@ Ensure you have the following installed on your system:
    cd docker-pi
    ```
 
-2. Build the Docker image:
+2. Configure your firmware settings:
+   ```bash
+   cp config/firmware-config.template.json config/firmware-config.json
+   # Edit firmware-config.json with your settings
+   ```
+
+3. Build the Docker image:
    ```bash
    docker-compose build
    ```
 
-3. Run the container:
+4. Run the container:
    ```bash
    docker-compose up -d
    ```
 
-4. Enter the build environment:
+5. Enter the build environment:
    ```bash
-   docker exec -it yocto-builder bash
+   docker exec -it firmware-builder bash
    ```
 
-5. Start your Yocto build inside the container:
+6. Start your firmware build inside the container:
    ```bash
    source /build/env-setup.sh && bitbake <your-target>
    ```
+
+## 🔧 Firmware Build Configuration
+
+### Supported Targets
+- Raspberry Pi (all models)
+- Custom embedded boards (via toolchain configuration)
+- RISC-V development boards
+
+### Build Options
+```bash
+# Basic firmware build
+make firmware
+
+# Debug build with symbols
+make firmware-debug
+
+# Clean build artifacts
+make clean-firmware
+```
 
 ## 🛠️ Configuration
 
@@ -105,6 +134,12 @@ Verify the installation:
 ```
 docker-compose --version
 ```
+
+## 📚 Debugging Tools
+- Built-in GDB support
+- JTAG interface compatibility
+- Firmware validation tools
+- Memory analysis utilities
 
 ## 🔥 Why Use This?
 
